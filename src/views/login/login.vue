@@ -3,8 +3,9 @@
     <!--圖片-->
     <div class="absolute w-1/2 vertical left-32 hidden lg:block">
 
-      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_hy4txm7l.json" background="transparent" speed="1"
-                     class="h-5/6 w-5/6" loop autoplay></lottie-player>
+      <lottie :options="defaultOptions2"
+              class="h-5/6 w-5/6" />
+
     </div>
     <!--登入表格-->
     <div class="absolute bg-white lg:rounded-2xl rounded-none lg:shadow-2xl shadow-none p-7 lg:p-10 lg:w-96 w-screen lg:right-32 right-0 vertical">
@@ -46,11 +47,17 @@
 
 <script>
   import { defineComponent, ref } from "vue";
+  import Lottie from "vue-lottie";
+  import animationData2 from "@/js/Lottie/login";
 
   export default defineComponent({
+    components:{
+      Lottie
+    },
     name: "",
     data() {
       return {
+        defaultOptions2: { animationData: animationData2, loop: true },
         form:[
           {
             name: '',
