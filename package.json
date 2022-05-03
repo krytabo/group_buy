@@ -8,9 +8,21 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@heroicons/vue": "^1.0.6",
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "autoprefixer": "^9",
     "core-js": "^3.6.5",
+    "daisyui": "^2.13.6",
+    "element-plus": "^2.0.2",
+    "element3": "^0.0.40",
+    "naive-ui": "^2.25.2",
+    "postcss": "^7",
+    "remixicon": "^2.5.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "uikit": "^3.11.1",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
+    "vue-router": "^4.0.13",
+    "vueisotope": "^3.1.2",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
@@ -27,7 +39,8 @@
     "eslint-plugin-vue": "^7.0.0",
     "prettier": "^2.2.1",
     "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "vue-cli-plugin-tailwind": "~2.2.18"
   },
   "eslintConfig": {
     "root": true,
