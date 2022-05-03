@@ -1,11 +1,12 @@
 <template>
-  <n-config-provider :locale="zhTW" :date-locale="dateZhTW">
+  <router-view></router-view>
+  <!--<n-config-provider :locale="zhTW" :date-locale="dateZhTW">
     <n-layout class="h-screen" position="absolute">
-      <!--====================-->
-      <!--       Header       -->
-      <!--====================-->
+      &lt;!&ndash;====================&ndash;&gt;
+      &lt;!&ndash;       Header       &ndash;&gt;
+      &lt;!&ndash;====================&ndash;&gt;
       <nav class="bg-gray-50 py-2 md:py-4 flex items-center px-6" style="height: 60px">
-          <!--LOGO-->
+          &lt;!&ndash;LOGO&ndash;&gt;
           <div class="flex justify-between items-center">
             <a href="#" class="font-bold text-xl text-indigo-600">
               <img width="136"  src="../src/assets/eztit.svg" alt="logo">
@@ -14,19 +15,19 @@
               <i class="ri-menu-3-line"></i>
             </button>
           </div>
-          <!--右邊按鈕-->
+          &lt;!&ndash;右邊按鈕&ndash;&gt;
           <div class="hidden md:flex mt-3 md:mt-0 md:ml-auto items-center space-x-2" id="navbar-collapse">
 
-            <!--切換社區-->
-            <!--<n-popselect v-model:value="value" :options="options" trigger="click">
+            &lt;!&ndash;切換社區&ndash;&gt;
+            &lt;!&ndash;<n-popselect v-model:value="value" :options="options" trigger="click">
               <n-button>{{ value || '彈出選擇' }}</n-button>
-            </n-popselect>-->
+            </n-popselect>&ndash;&gt;
 
-            <!--用戶-->
+            &lt;!&ndash;用戶&ndash;&gt;
             <div class="header-btn">
               <UserCircleIcon class="h-5 w-5"></UserCircleIcon>
             </div>
-            <!--通知-->
+            &lt;!&ndash;通知&ndash;&gt;
             <n-badge :value="NewsBadge" :max="15">
               <n-popover trigger="click" style="width: 380px" class="p-0">
                 <template #trigger>
@@ -34,14 +35,14 @@
                     <i class="ri-notification-3-line text-lg"></i>
                   </div>
                 </template>
-                <!--選單內容-->
+                &lt;!&ndash;選單內容&ndash;&gt;
                 <div class="border-b p-3 flex">
                   <div class="flex-1">最近收到的訊息</div>
                   <div class="cursor-pointer text-blue-500" @click="NewsReadAll">標記為已讀</div>
                 </div>
                 <div class="p-3">
                   <div class="flex space-x-4 cursor-pointer hover:bg-gray-100 p-3 rounded news-list"  v-for="(item,index) in NewsList" v-bind:key="index" @click="NewsRead">
-                    <!--<div style="width: 100px;height: 100px" class="object-fill rounded bg-gray-100"></div>-->
+                    &lt;!&ndash;<div style="width: 100px;height: 100px" class="object-fill rounded bg-gray-100"></div>&ndash;&gt;
                     <div class="flex-1 w-20">
                       <div class="flex mb-2">
                         <p class="text-base mb-0 flex-1 truncate">{{ item.title }}</p>
@@ -55,7 +56,7 @@
                 </div>
                 <div class="border-t p-2 text-center cursor-pointer text-blue-500">顯示更多</div>
               </n-popover>
-             <!-- <n-popselect
+             &lt;!&ndash; <n-popselect
                 v-model:value="value"
                 :options="options"
                 size="medium"
@@ -65,32 +66,32 @@
                 <div class="hidden md:flex w-10 items-center justify-center bg-white hover:bg-gray-200 h-10 rounded-md text-gray-600 cursor-pointer">
                   <i class="ri-notification-3-line text-lg"></i>
                 </div>
-              </n-popselect>-->
-             <!-- <router-link to="/shopping_car"  class="hidden md:flex w-10 items-center justify-center bg-white hover:bg-gray-200 h-10 rounded-md text-gray-600">
+              </n-popselect>&ndash;&gt;
+             &lt;!&ndash; <router-link to="/shopping_car"  class="hidden md:flex w-10 items-center justify-center bg-white hover:bg-gray-200 h-10 rounded-md text-gray-600">
                 <i class="ri-notification-3-line text-lg"></i>
-              </router-link>-->
+              </router-link>&ndash;&gt;
             </n-badge>
-            <!--設定-->
+            &lt;!&ndash;設定&ndash;&gt;
             <div class="header-btn">
               <CogIcon class="h-5 w-5"></CogIcon>
             </div>
 
             <el-button type="text" class="text-black hover:bg-gray-200 p-3 h-full">返回前台</el-button>
 
-            <!--小螢幕選單-->
+            &lt;!&ndash;小螢幕選單&ndash;&gt;
             <a href="javascript:"  class="md:hidden flex w-10 items-center justify-center bg-white hover:bg-gray-200 h-10 rounded-md">
               <i class="ri-menu-3-line text-lg text-gray-600"></i>
             </a>
 
-            <!--<a href="#" class="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-transparent rounded hover:bg-indigo-100 hover:text-indigo-700 transition-colors duration-300">登入</a>
-            <a href="#" class="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-solid border-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">註冊</a>-->
+            &lt;!&ndash;<a href="#" class="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-transparent rounded hover:bg-indigo-100 hover:text-indigo-700 transition-colors duration-300">登入</a>
+            <a href="#" class="p-2 lg:px-4 md:mx-2 text-indigo-600 text-center border border-solid border-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-colors duration-300 mt-1 md:mt-0 md:ml-1">註冊</a>&ndash;&gt;
           </div>
       </nav>
-      <!--====================-->
-      <!--       Canter       -->
-      <!--====================-->
+      &lt;!&ndash;====================&ndash;&gt;
+      &lt;!&ndash;       Canter       &ndash;&gt;
+      &lt;!&ndash;====================&ndash;&gt;
       <n-layout position="absolute" style="top: 60px; bottom: 64px; background: #F0F2F5;" has-sider class="p-5">
-        <!--左邊-->
+        &lt;!&ndash;左邊&ndash;&gt;
         <n-layout-sider
           collapse-mode="width"
           :collapsed-width="15"
@@ -107,10 +108,10 @@
             default-value="index"
           ></n-menu>
         </n-layout-sider>
-        <!--內容-->
+        &lt;!&ndash;內容&ndash;&gt;
         <n-layout class="ml-6 rounded-lg bg-transparent layout-height" >
           <router-view></router-view>
-          <!--<n-carousel show-arrow>
+          &lt;!&ndash;<n-carousel show-arrow>
             <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg" alt="" />
             <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg" alt="" />
             <img class="carousel-img" src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg" alt="" />
@@ -226,18 +227,17 @@
             測試
           </n-button>
 
-          <n-date-picker v-model:value="timestamp" type="datetime" clearable />-->
+          <n-date-picker v-model:value="timestamp" type="datetime" clearable />&ndash;&gt;
         </n-layout>
       </n-layout>
-      <!--====================-->
-      <!--       Footer       -->
-      <!--====================-->
+      &lt;!&ndash;====================&ndash;&gt;
+      &lt;!&ndash;       Footer       &ndash;&gt;
+      &lt;!&ndash;====================&ndash;&gt;
       <n-layout-footer position="absolute" style="height: 64px; padding: 24px;" bordered>
         Footer
       </n-layout-footer>
     </n-layout>
-  </n-config-provider>
-
+  </n-config-provider>-->
 </template>
 
 <script>

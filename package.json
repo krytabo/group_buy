@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
+    "@lottiefiles/vue-lottie-player": "^1.0.5",
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "autoprefixer": "^9",
     "core-js": "^3.6.5",

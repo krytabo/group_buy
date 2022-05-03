@@ -3,7 +3,32 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/", //賣家中心
+    path: "/login", //住戶登入
+    name: "Login",
+    component: () => import("@/views/login/login"),
+  },
+  {
+    path: "/vendor_login", //特約商登入
+    name: "VendorLogin",
+    component: () => import("@/views/login/VendorLogin"),
+  },
+  {
+    path: "/404", //錯誤
+    name: "404",
+    component: () => import("@/components/404"),
+  },
+  {
+    path: "/", //官網首頁
+    name: "official_index",
+    component: () => import("@/views/Official"),
+  },
+  {
+    path: "/backstage", //賣家中心-首頁
+    name: "Backstage",
+    component: () => import("@/views/Backstage"),
+  },
+  {
+    path: "/seller", //賣家中心-首頁
     name: "Seller",
     component: () => import("@/components/Seller/Dashboard/index"),
   },
