@@ -15,7 +15,7 @@ const routes = [
   {
     path: "/404", //錯誤
     name: "404",
-    component: () => import("@/components/404"),
+    component: () => import("@/views/404"),
   },
   {
     path: "/", //官網首頁

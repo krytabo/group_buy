@@ -3,7 +3,7 @@
     <!--圖片-->
     <div class="absolute w-1/2 vertical left-32 hidden lg:block">
 
-      <lottie :options="defaultOptions2"
+      <lottie :options="LoginAnimation"
               class="h-5/6 w-5/6" />
 
     </div>
@@ -48,7 +48,7 @@
 <script>
   import { defineComponent, ref } from "vue";
   import Lottie from "vue-lottie";
-  import animationData2 from "@/js/Lottie/login";
+  import LoginAnimation from "@/js/Lottie/login.json";
 
   export default defineComponent({
     components:{
@@ -57,7 +57,7 @@
     name: "",
     data() {
       return {
-        defaultOptions2: { animationData: animationData2, loop: true },
+        LoginAnimation: { animationData: LoginAnimation, loop: true },
         form:[
           {
             name: '',

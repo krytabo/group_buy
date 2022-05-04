@@ -190,8 +190,7 @@
           <div class="flex flex-col mb-10 lg:items-start items-center">
             <div class="w-32 h-32 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
               <div class="w-24 h-24">
-                <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_2yyuy7co.json" background="transparent" speed="1"
-                               class="f-full w-full" loop autoplay></lottie-player>
+                <lottie :options="DeleteAnimation" class="h-full w-full"/>
               </div>
             </div>
             <div class="flex-grow">
@@ -201,8 +200,7 @@
           </div>
           <div class="flex flex-col mb-10 lg:items-start items-center">
             <div class="w-32 h-32 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
-              <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_7ufvoduf.json" background="transparent" speed="1"
-                             class="f-full w-full" loop autoplay></lottie-player>
+              <lottie :options="PlantAnimation" class="h-full w-full"/>
             </div>
             <div class="flex-grow">
               <h2 class="text-gray-900 text-lg font-medium mb-3">淨零、碳中和</h2>
@@ -213,8 +211,7 @@
           <div class="flex flex-col mb-10 lg:items-start items-center">
             <div class="w-32 h-32 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-5">
               <div class="w-24 h-24">
-              <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_ils9u0yd.json" background="transparent" speed="1"
-                             class="f-full w-full" loop autoplay></lottie-player>
+                <lottie :options="DepositAnimation" class="h-full w-full"/>
                 </div>
             </div>
             <div class="flex-grow">
@@ -343,11 +340,23 @@
   import { zhTW, dateZhTW } from 'naive-ui'
   import { h } from "vue";
   import { RouterLink } from "vue-router";
+  import Lottie from "vue-lottie";
+  import DeleteAnimation from "@/js/Lottie/delete.json";
+  import DepositAnimation from "@/js/Lottie/deposit.json";
+  import PlantAnimation from "@/js/Lottie/plant.json";
 
   export default {
+    components:{
+      Lottie
+    },
     name: "",
     data() {
       return {
+        //動畫載入
+        DeleteAnimation: { animationData: DeleteAnimation, loop: true },
+        DepositAnimation: { animationData: DepositAnimation, loop: true },
+        PlantAnimation: { animationData: PlantAnimation, loop: true },
+
         // Navbar按鈕內容
         HeaderItem: [
           {
