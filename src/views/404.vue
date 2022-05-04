@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute bottom-60 sm:bottom-32 text-white z-100 text-center w-full space-y-4">
+  <div class="z-100 absolute bottom-60 w-full space-y-4 text-center text-white sm:bottom-32">
     <p class="text-2xl">您訪問的頁面不存在</p>
   </div>
 
@@ -9,21 +9,19 @@
 </template>
 
 <script>
-  import Lottie from "vue-lottie";
-  import ErrorAnimation from "@/js/Lottie/404";
-  export default {
-    components:{
-      Lottie
-    },
-    name: "",
-    data() {
-      return {
-        ErrorAnimation: { animationData: ErrorAnimation, loop: true },
-      };
-    }
-  };
+import Lottie from "vue-lottie";
+import ErrorAnimation from "@/js/Lottie/404";
+export default {
+  components: {
+    Lottie,
+  },
+  name: "",
+  data() {
+    return {
+      ErrorAnimation: { animationData: ErrorAnimation, loop: true },
+    };
+  },
+};
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

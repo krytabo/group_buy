@@ -241,288 +241,342 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import { h,ref,reactive } from "vue";
-  import { RouterLink } from "vue-router";
-  import { zhTW, dateZhTW } from 'naive-ui'
-  import { CogIcon,UserCircleIcon } from '@heroicons/vue/outline'
+// @ is an alias to /src
+import { h, ref, reactive } from "vue";
+import { RouterLink } from "vue-router";
+import { zhTW, dateZhTW } from "naive-ui";
+import { CogIcon, UserCircleIcon } from "@heroicons/vue/outline";
 
-
-  export default ({
-    name: "Home",
-    components: { CogIcon,UserCircleIcon },
-    setup() {
-
-      const menuOptions = [
-        {
-          label: () => h(RouterLink, {
-            to: {
-              name: "Seller",
-            }
-          }, { default: () => "首頁" }),
-          /*label: () => h("a", {
+export default {
+  name: "Home",
+  components: { CogIcon, UserCircleIcon },
+  setup() {
+    const menuOptions = [
+      {
+        label: () =>
+          h(
+            RouterLink,
+            {
+              to: {
+                name: "Seller",
+              },
+            },
+            { default: () => "首頁" }
+          ),
+        /*label: () => h("a", {
             href: "https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F",
             target: "_blank",
             rel: "noopenner noreferrer"
           }, "首頁"),*/
-          key: "index",
-
-        },
-        {
-          label: () => h(RouterLink, {
-            to: {
-              name: "Group"
-            }
-          }, { default: () => "揪團" }),
-          key: "group",
-
-        },
-        {
-          label: () => h(RouterLink, {
-            to: {
-              name: "Commodity"
-            }
-          }, { default: () => "商品" }),
-          key: "commodity",
-
-        },
-        {
-          label: () => h(RouterLink, {
-            to: {
-              name: "Order"
-            }
-          }, { default: () => "訂單" }),
-          key: "order",
-
-        },
-        {
-          label: () => h(RouterLink, {
-            to: {
-              name: "Booking"
-            }
-          }, { default: () => "商品訂貨" }),
-          key: "booking",
-
-        },
-        {
-          label: "用戶管理",
-          key: "member",
-
-          // disabled: true,
-          children: [
+        key: "index",
+      },
+      {
+        label: () =>
+          h(
+            RouterLink,
             {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "MemberData"
-                }
-              }, { default: () => "用戶資料" }),
-              key: "member-data"
+              to: {
+                name: "Group",
+              },
             },
+            { default: () => "揪團" }
+          ),
+        key: "group",
+      },
+      {
+        label: () =>
+          h(
+            RouterLink,
             {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "MemberGroup"
-                }
-              }, { default: () => "用戶群組" }),
-              key: "member-group"
-            }
-
-          ]
-        },
-        {
-          label: "數據報告",
-          key: "chart",
-          children: [
-            {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "ChartGenera"
-                }
-              }, { default: () => "數據總覽" }),
-              key: "chart-general"
+              to: {
+                name: "Commodity",
+              },
             },
+            { default: () => "商品" }
+          ),
+        key: "commodity",
+      },
+      {
+        label: () =>
+          h(
+            RouterLink,
             {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "ChartCommodity"
-                }
-              }, { default: () => "商品分析" }),
-              key: "chart-commodity"
-            }
-
-          ]
-        },
-        {
-          label:"賣場佈置",
-          key:"decoration",
-          children: [
-            {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "DecorationBanner"
-                }
-              }, { default: () => "橫幅廣告" }),
-              key:"decoration-banner",
+              to: {
+                name: "Order",
+              },
             },
+            { default: () => "訂單" }
+          ),
+        key: "order",
+      },
+      {
+        label: () =>
+          h(
+            RouterLink,
             {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "DecorationCategory"
-                }
-              }, { default: () => "分類設定" }),
-              key:"decoration-category",
-            }
-          ]
-        },
-        {
-          label:"加值服務中心",
-          key:"advertising",
-          children: [
-            {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "Advertising"
-                }
-              }, { default: () => "廣告管理" }),
-              key:"advertising",
+              to: {
+                name: "Booking",
+              },
             },
-            {
-              label: () => h(RouterLink, {
-                to: {
-                  name: "Stored"
-                }
-              }, { default: () => "加值管理" }),
-              key:"stored",
-            }
-          ]
-        }
+            { default: () => "商品訂貨" }
+          ),
+        key: "booking",
+      },
+      {
+        label: "用戶管理",
+        key: "member",
 
-      ];
+        // disabled: true,
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "MemberData",
+                  },
+                },
+                { default: () => "用戶資料" }
+              ),
+            key: "member-data",
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "MemberGroup",
+                  },
+                },
+                { default: () => "用戶群組" }
+              ),
+            key: "member-group",
+          },
+        ],
+      },
+      {
+        label: "數據報告",
+        key: "chart",
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "ChartGenera",
+                  },
+                },
+                { default: () => "數據總覽" }
+              ),
+            key: "chart-general",
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "ChartCommodity",
+                  },
+                },
+                { default: () => "商品分析" }
+              ),
+            key: "chart-commodity",
+          },
+        ],
+      },
+      {
+        label: "賣場佈置",
+        key: "decoration",
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "DecorationBanner",
+                  },
+                },
+                { default: () => "橫幅廣告" }
+              ),
+            key: "decoration-banner",
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "DecorationCategory",
+                  },
+                },
+                { default: () => "分類設定" }
+              ),
+            key: "decoration-category",
+          },
+        ],
+      },
+      {
+        label: "加值服務中心",
+        key: "advertising",
+        children: [
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "Advertising",
+                  },
+                },
+                { default: () => "廣告管理" }
+              ),
+            key: "advertising",
+          },
+          {
+            label: () =>
+              h(
+                RouterLink,
+                {
+                  to: {
+                    name: "Stored",
+                  },
+                },
+                { default: () => "加值管理" }
+              ),
+            key: "stored",
+          },
+        ],
+      },
+    ];
 
-      // 切換社區
-      const value = ref('測試展示的社區名稱')
-      const options = [
-        {
-          value: '測試展示的社區名稱',
-          label: '測試展示的社區名稱',
-        },
-        {
-          value: '測試社區２',
-          label: '測試社區２',
-        },
-        {
-          value: '測試社區３',
-          label: '測試社區３',
-        },
-        {
-          value: '測試社區４',
-          label: '測試社區４',
-        },
-        {
-          value: '測試社區５５５５５５',
-          label: '測試社區５５５５５５',
-        },
-      ]
+    // 切換社區
+    const value = ref("測試展示的社區名稱");
+    const options = [
+      {
+        value: "測試展示的社區名稱",
+        label: "測試展示的社區名稱",
+      },
+      {
+        value: "測試社區２",
+        label: "測試社區２",
+      },
+      {
+        value: "測試社區３",
+        label: "測試社區３",
+      },
+      {
+        value: "測試社區４",
+        label: "測試社區４",
+      },
+      {
+        value: "測試社區５５５５５５",
+        label: "測試社區５５５５５５",
+      },
+    ];
 
-      //訊息通知
-      const NewsBadge = ref(0);
-      const BadgeNumber = ref(0);
-      const isOpen = ref(true);
-      const NewsList = reactive([
-        {
-          title:"有一筆新訂單",
-          content:"張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
-          time:"2022-02-20 20:34:58",
-          read:false
-        },
-        {
-          title:"有一筆新訂單",
-          content:"張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
-          time:"2022-02-20 20:34:58",
-          read:true
-        },
-        {
-          title:"有一筆新訂單",
-          content:"張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
-          time:"2022-02-20 20:34:58",
-          read:false
-        },
-        {
-          title:"有一筆新訂單",
-          content:"張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
-          time:"2022-02-20 20:34:58",
-          read:false
-        },
-        {
-          title:"有一筆新訂單",
-          content:"張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
-          time:"2022-02-20 20:34:58",
-          read:false
-        },
-      ]);
-      const NewsRead = () => {
-        // NewsBadge.value = Math.max(0, NewsBadge.value - 1)
-        // NewsList.value((item) => item.read === true);
-        NewsList.valueOf().read = true
-        console.log(NewsList)
+    //訊息通知
+    const NewsBadge = ref(0);
+    const BadgeNumber = ref(0);
+    const isOpen = ref(true);
+    const NewsList = reactive([
+      {
+        title: "有一筆新訂單",
+        content: "張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
+        time: "2022-02-20 20:34:58",
+        read: false,
+      },
+      {
+        title: "有一筆新訂單",
+        content: "張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
+        time: "2022-02-20 20:34:58",
+        read: true,
+      },
+      {
+        title: "有一筆新訂單",
+        content: "張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
+        time: "2022-02-20 20:34:58",
+        read: false,
+      },
+      {
+        title: "有一筆新訂單",
+        content: "張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
+        time: "2022-02-20 20:34:58",
+        read: false,
+      },
+      {
+        title: "有一筆新訂單",
+        content: "張美美(A001)購買「德國 Donkey幸運繽紛招財貓 經典色系 - 黑色 Ｘ 1」",
+        time: "2022-02-20 20:34:58",
+        read: false,
+      },
+    ]);
+    const NewsRead = () => {
+      // NewsBadge.value = Math.max(0, NewsBadge.value - 1)
+      // NewsList.value((item) => item.read === true);
+      NewsList.valueOf().read = true;
+      console.log(NewsList);
+    };
 
-      };
-
-      /*const ItemArr = computed(() => {
+    /*const ItemArr = computed(() => {
         return NewsList.filter((item) => item.read === true);
       });*/
 
-      watch: {
-        NewsBadge.value = NewsBadge.value + NewsList.length
-        /*if(NewsList.length === false){
+    watch: {
+      NewsBadge.value = NewsBadge.value + NewsList.length;
+      /*if(NewsList.length === false){
           NewsBadge.value = BadgeNumber.value + 1
         } else {
           NewsBadge.value = BadgeNumber.value - 1
         }*/
 
-        console.log(NewsBadge.value,'123')
-        console.log(BadgeNumber.value)
-        console.log(NewsList)
-        console.log(NewsList.length)
-      }
-      //時間
-      const timestamp = ref(null);
-
-      //變更內容
-      const info = ref(true);
-      const changeMsg = () => {
-        // info.value = false
-        if (info.value) {
-          info.value = !info.value;
-        } else {
-          info.value = !info.value;
-        }
-      };
-
-      //增加數值
-      const message = ref(0);
-      const changeText = () => message.value++;
-
-      return {
-        zhTW,
-        dateZhTW,
-        value,
-        options,
-        timestamp,
-        info,
-        changeMsg,
-        message,
-        changeText,
-        menuOptions,
-        NewsBadge,
-        NewsList,
-        BadgeNumber,
-        NewsRead,
-        isOpen,
-      };
+      console.log(NewsBadge.value, "123");
+      console.log(BadgeNumber.value);
+      console.log(NewsList);
+      console.log(NewsList.length);
     }
-  });
-  /*export default {
+    //時間
+    const timestamp = ref(null);
+
+    //變更內容
+    const info = ref(true);
+    const changeMsg = () => {
+      // info.value = false
+      if (info.value) {
+        info.value = !info.value;
+      } else {
+        info.value = !info.value;
+      }
+    };
+
+    //增加數值
+    const message = ref(0);
+    const changeText = () => message.value++;
+
+    return {
+      zhTW,
+      dateZhTW,
+      value,
+      options,
+      timestamp,
+      info,
+      changeMsg,
+      message,
+      changeText,
+      menuOptions,
+      NewsBadge,
+      NewsList,
+      BadgeNumber,
+      NewsRead,
+      isOpen,
+    };
+  },
+};
+/*export default {
     name: "Home",
     components: {},
     data() {
@@ -534,36 +588,36 @@
 </script>
 
 <style lang="scss">
-  /*.router-link-active{
+/*.router-link-active{
     @apply text-white rounded hover:bg-blue-800 hover:bg-white transition-colors duration-300 bg-blue-500 #{!important}
   }*/
 
-  .header-btn {
-    @apply hidden md:flex w-10 items-center justify-center  hover:bg-gray-200 h-10 rounded-md text-gray-600 cursor-pointer #{!important}
-  }
-  .nav-btn {
-    @apply flex items-center justify-center h-10 hover:bg-gray-200 rounded hover:text-gray-800 #{!important}
-  }
+.header-btn {
+  @apply hidden h-10 w-10 cursor-pointer items-center  justify-center rounded-md text-gray-600 hover:bg-gray-200 md:flex #{!important};
+}
+.nav-btn {
+  @apply flex h-10 items-center justify-center rounded hover:bg-gray-200 hover:text-gray-800 #{!important};
+}
 
-  .carousel-img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-  }
+.carousel-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
 
-  .news-text{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-  }
+.news-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
 
-  .news-list:not(:last-child) {
-    @apply border-b #{!important}
-  }
+.news-list:not(:last-child) {
+  @apply border-b #{!important};
+}
 
-  .layout-height{
-    height: calc(100vh - 166px);
-  }
+.layout-height {
+  height: calc(100vh - 166px);
+}
 </style>
