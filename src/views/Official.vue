@@ -564,11 +564,6 @@ export default {
   background: #fff;
 }
 
-.wrapper-background,
-.navbar_header {
-  box-shadow: 0 5px 10px rgba(172, 169, 169, 0.2);
-}
-
 .section_banner {
   background: #f3fbfd;
 }
