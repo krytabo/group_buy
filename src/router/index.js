@@ -13,6 +13,16 @@ const routes = [
     component: () => import("@/views/login/VendorLogin"),
   },
   {
+    path: "/manage_login", //管理平台登入
+    name: "ManageLogin",
+    component: () => import("@/views/login/ManageLogin"),
+  },
+  {
+    path: "/manage_SignUp", //管理平台註冊
+    name: "ManageSignUp",
+    component: () => import("@/views/SignUp/ManageSignUp"),
+  },
+  {
     path: "/404", //錯誤
     name: "404",
     component: () => import("@/views/404"),

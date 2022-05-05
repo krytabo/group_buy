@@ -33,7 +33,7 @@
 
         <n-divider>或</n-divider>
 
-        <n-button class="w-full" size="large" strong>使用特約商帳號登入</n-button>
+        <n-button class="w-full" size="large" strong @click="$router.push('vendor_login')">使用特約商帳號登入</n-button>
       </n-form>
     </div>
 

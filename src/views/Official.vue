@@ -12,9 +12,14 @@
       </button>
     </div>
     <div class="hidden w-full flex-grow flex-row-reverse sm:flex sm:w-auto sm:items-center">
-      <router-link to="/"><p class="header-link-item" :class="{ color: color }">管理平台登入</p></router-link>
-      <router-link to="/"><p class="header-link-item" :class="{ color: color }">特約商登入</p></router-link>
-      <router-link to="/login"><p class="header-link-item" :class="{ color: color }">揪團商店</p></router-link>
+      <template v-for="item in HeaderItem">
+        <router-link :to="item.src">
+          <p class="header-link-item" :class="{ color: color }">{{ item.name }}</p>
+        </router-link>
+      </template>
+      <!--<router-link to="/manage_login"><p class="header-link-item" :class="{ color: color }">管理平台登入</p></router-link>
+      <router-link to="/vendor_login"><p class="header-link-item" :class="{ color: color }">特約商登入</p></router-link>
+      <router-link to="/login"><p class="header-link-item" :class="{ color: color }">揪團商店</p></router-link>-->
     </div>
     <div class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden" :class="open ? 'block' : 'hidden'">
       <div class="rounded-lg shadow-lg">
@@ -50,9 +55,15 @@
                   {{ item.item }}
                 </div>-->
 
+                <template v-for="item in HeaderItem">
+                  <router-link :to="item.src">
+                    <div class="text-base font-medium leading-6 text-gray-900">{{ item.name }}</div>
+                  </router-link>
+                </template>
+
                 <router-link to="/login"><div class="text-base font-medium leading-6 text-gray-900">揪團商店</div></router-link>
-                <router-link to="/"><div class="text-base font-medium leading-6 text-gray-900">特約商登入</div></router-link>
-                <router-link to="/"><div class="text-base font-medium leading-6 text-gray-900">管理平台登入</div></router-link>
+                <router-link to="/vendor_login"><div class="text-base font-medium leading-6 text-gray-900">特約商登入</div></router-link>
+                <router-link to="/manage_login"><div class="text-base font-medium leading-6 text-gray-900">管理平台登入</div></router-link>
               </a>
             </nav>
           </div>
@@ -307,7 +318,7 @@
         <div class="section_flexType space_between mt-5 w-full text-left lg:mt-0 lg:flex-1">
           <div class="mt-10 w-full px-4 sm:mt-0 lg:w-1/2">
             <div class="text-lg">功能導覽</div>
-            <ul class="list-unstyled mt-2 pl-0">
+            <ul class="mt-2 pl-0">
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">揪團商店</a></li>
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">特約商登入</a></li>
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">管理平台登入</a></li>
@@ -315,7 +326,7 @@
           </div>
           <div class="mt-10 w-full px-4 sm:mt-0 lg:w-1/2">
             <div class="text-lg">聯絡我們</div>
-            <ul class="list-unstyled mt-2 pl-0">
+            <ul class="mt-2 pl-0">
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">聯絡電話：04-2326-7189</a></li>
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">地址：台中市西區臺灣大道二段239號7樓-4</a></li>
               <li><a class="block pb-2 text-sm font-semibold text-gray-700 hover:text-gray-900" href="#">電子信箱：eztit@gmail.com</a></li>
@@ -357,26 +368,16 @@ export default {
       // Navbar按鈕內容
       HeaderItem: [
         {
-          item: "揪團商店",
-          label: () =>
-            h(
-              RouterLink,
-              {
-                to: {
-                  name: "Login",
-                },
-              },
-              { default: () => "揪團商店" }
-            ),
-          key: "login",
+          name: "揪團商店",
+          src: "/login",
         },
         {
-          item: "特約商登入",
-          url: "#2",
+          name: "特約商登入",
+          src: "/vendor_login",
         },
         {
-          item: "管理平台登入",
-          url: "#",
+          name: "管理平台登入",
+          src: "/manage_login",
         },
       ],
 
@@ -521,12 +522,12 @@ export default {
 }
 
 /*.section_join_groupon_button {
-        @apply px-5 py-3 bg-blue-500 text-white rounded-full cursor-pointer
-    }
+            @apply px-5 py-3 bg-blue-500 text-white rounded-full cursor-pointer
+        }
 
-    .title {
-        @apply my-0 mx-auto tracking-widest uppercase text-center font-semibold text-4xl pt-4 text-blue-500
-    }*/
+        .title {
+            @apply my-0 mx-auto tracking-widest uppercase text-center font-semibold text-4xl pt-4 text-blue-500
+        }*/
 
 .section_about_img {
   @apply mx-2 w-24 sm:my-0 sm:mx-auto sm:w-72;
@@ -560,7 +561,6 @@ export default {
 }
 
 .wrapper-background {
-  /*background: linear-gradient(#fff,#f4fafa 16%);*/
   background: #fff;
 }
 

@@ -37,7 +37,7 @@
               <!--選單內容-->
               <div class="flex border-b p-3">
                 <div class="flex-1">最近收到的訊息</div>
-                <div class="cursor-pointer text-blue-500" @click="NewsReadAll">標記為已讀</div>
+                <div class="cursor-pointer text-blue-500">標記為已讀</div>
               </div>
               <div class="p-3">
                 <div class="news-list flex cursor-pointer space-x-4 rounded p-3 hover:bg-gray-100" v-for="(item, index) in NewsList" v-bind:key="index" @click="NewsRead">
