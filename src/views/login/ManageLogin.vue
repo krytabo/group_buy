@@ -23,11 +23,11 @@
               <n-button quaternary type="info">忘記密碼？</n-button>
             </div>
           </div>
-          <n-button type="info" class="w-full" size="large" strong @click="$router.push('Backstage')">登入</n-button>
+          <n-button type="info" class="w-full" size="large" strong @click="$router.push('/backstage')">登入</n-button>
           <div class="mt-5 flex w-full items-center justify-center">
             <div>還沒有帳號？</div>
             <div class="text-left">
-              <n-button quaternary type="info">立即註冊</n-button>
+              <n-button quaternary type="info" @click="$router.push('/manage_SignUp')">立即註冊</n-button>
             </div>
           </div>
         </n-form>
