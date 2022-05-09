@@ -427,7 +427,7 @@ export default {
     handleScroll() {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       // let offsetTop = document.querySelector(".header").offsetTop;
-      //设置背景颜色的透明读
+      //背景透明度
       if (scrollTop) {
         this.style.backgroundColor = `rgba(249, 250, 251,${scrollTop / (scrollTop + 80)})`;
         this.color = true;

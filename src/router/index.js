@@ -3,6 +3,16 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "/", //官網首頁
+    name: "official_index",
+    component: () => import("@/views/Official"),
+  },
+  {
+    path: "/termsOfService", //註冊條款
+    name: "TermsOfService",
+    component: () => import("@/components/TermsOfService"),
+  },
+  {
     path: "/login", //住戶登入
     name: "Login",
     component: () => import("@/views/login/login"),
@@ -26,11 +36,6 @@ const routes = [
     path: "/404", //錯誤
     name: "404",
     component: () => import("@/views/404"),
-  },
-  {
-    path: "/", //官網首頁
-    name: "official_index",
-    component: () => import("@/views/Official"),
   },
   {
     path: "/backstage", //賣家中心-首頁

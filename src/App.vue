@@ -242,15 +242,15 @@
 
 <script>
 // @ is an alias to /src
-import { h, ref, reactive } from "vue";
+/*import { h, ref, reactive } from "vue";
 import { RouterLink } from "vue-router";
 import { zhTW, dateZhTW } from "naive-ui";
-import { CogIcon, UserCircleIcon } from "@heroicons/vue/outline";
+import { CogIcon, UserCircleIcon } from "@heroicons/vue/outline";*/
 
 export default {
   name: "Home",
-  components: { CogIcon, UserCircleIcon },
-  setup() {
+  /*  components: { CogIcon, UserCircleIcon },
+   setup() {
     const menuOptions = [
       {
         label: () =>
@@ -263,11 +263,11 @@ export default {
             },
             { default: () => "首頁" }
           ),
-        /*label: () => h("a", {
+        /!*label: () => h("a", {
             href: "https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F",
             target: "_blank",
             rel: "noopenner noreferrer"
-          }, "首頁"),*/
+          }, "首頁"),*!/
         key: "index",
       },
       {
@@ -522,17 +522,17 @@ export default {
       console.log(NewsList);
     };
 
-    /*const ItemArr = computed(() => {
+    /!*const ItemArr = computed(() => {
         return NewsList.filter((item) => item.read === true);
-      });*/
+      });*!/
 
     watch: {
       NewsBadge.value = NewsBadge.value + NewsList.length;
-      /*if(NewsList.length === false){
+      /!*if(NewsList.length === false){
           NewsBadge.value = BadgeNumber.value + 1
         } else {
           NewsBadge.value = BadgeNumber.value - 1
-        }*/
+        }*!/
 
       console.log(NewsBadge.value, "123");
       console.log(BadgeNumber.value);
@@ -574,7 +574,7 @@ export default {
       NewsRead,
       isOpen,
     };
-  },
+  },*/
 };
 /*export default {
     name: "Home",
