@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.0.0",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "@heroicons/vue": "^1.0.6",
     "@lottiefiles/vue-lottie-player": "^1.0.5",
     "@tailwindcss/postcss7-compat": "^2.2.17",
@@ -17,6 +18,7 @@
     "daisyui": "^2.13.6",
     "element-plus": "^2.0.2",
     "element3": "^0.0.40",
+    "firebase": "^9.8.1",
     "naive-ui": "^2.25.2",
     "postcss": "^7",
     "prettier-plugin-tailwindcss": "^0.1.10",

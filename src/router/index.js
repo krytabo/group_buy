@@ -13,14 +13,29 @@ const routes = [
     component: () => import("@/components/TermsOfService"),
   },
   {
+    path: "/forgotPwd", //忘記密碼
+    name: "forgotPwd",
+    component: () => import("@/views/login/forgotPassword"),
+  },
+  {
     path: "/login", //住戶登入
     name: "Login",
     component: () => import("@/views/login/login"),
   },
   {
+    path: "/signup", //住戶註冊
+    name: "SignUp",
+    component: () => import("@/views/SignUp/SignUp"),
+  },
+  {
     path: "/vendor_login", //特約商登入
     name: "VendorLogin",
     component: () => import("@/views/login/VendorLogin"),
+  },
+  {
+    path: "/vendor_SignUp", //特約商註冊
+    name: "VendorSignUp",
+    component: () => import("@/views/SignUp/VendorSignUp"),
   },
   {
     path: "/manage_login", //管理平台登入
@@ -55,7 +70,7 @@ const routes = [
   {
     path: "/group_buy", //團購福利社
     name: "GroupBuy",
-    component: () => import("@/components/Shop/GroupBuy/index.vue"),
+    component: () => import("@/views/GroupBuy"),
   },
   {
     path: "/highlights", //活動花絮

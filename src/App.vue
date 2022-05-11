@@ -1,6 +1,6 @@
 <template>
   <router-view></router-view>
-  <!--<n-config-provider :locale="zhTW" :date-locale="dateZhTW">
+  <!--<n-configured-provider :locale="zhTW" :date-locale="dateZhTW">
     <n-layout class="h-screen" position="absolute">
       &lt;!&ndash;====================&ndash;&gt;
       &lt;!&ndash;       Header       &ndash;&gt;
@@ -237,7 +237,7 @@
         Footer
       </n-layout-footer>
     </n-layout>
-  </n-config-provider>-->
+  </n-configured-provider>-->
 </template>
 
 <script>

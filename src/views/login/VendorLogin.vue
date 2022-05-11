@@ -10,10 +10,14 @@
 
       <n-form ref="formRef" label-placement="top" :model="form">
         <n-form-item label="帳號" path="user.name">
-          <n-input v-model:value="form.name" placeholder="請輸入帳號" />
+          <n-auto-complete v-model:value="form.name" :input-props="{ autocomplete: 'disabled' }" :options="options">
+            <template #default="{ handleInput, handleBlur, handleFocus, value: slotValue }">
+              <n-input type="text" :value="slotValue" placeholder="請輸入帳號" @input="handleInput" @focus="handleFocus" @blur="handleBlur" clearable />
+            </template>
+          </n-auto-complete>
         </n-form-item>
         <n-form-item label="密碼" path="user.age">
-          <n-input v-model:value="form.password" placeholder="請輸入密碼" />
+          <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入密碼" clearable />
         </n-form-item>
         <div class="flex w-full">
           <n-checkbox v-model:checked="form.isRead">記住我</n-checkbox>
@@ -27,12 +31,11 @@
         <div class="mt-5 flex w-full items-center justify-center">
           <div>還沒有帳號？</div>
           <div class="text-left">
-            <n-button quaternary type="info">立即註冊</n-button>
+            <n-button quaternary type="info" @click="$router.push('/vendor_SignUp')">立即註冊</n-button>
           </div>
         </div>
       </n-form>
     </div>
-
     <footer class="absolute bottom-5 w-screen text-center">Copyright © 2022 EZTIT Inc</footer>
   </div>
 </template>
@@ -61,6 +64,13 @@ export default defineComponent({
   },
   mounted() {},
   methods: {},
+  computed: {
+    options() {
+      if (!this.form.name) return [];
+      if (this.form.name.indexOf("@") > -1) return [];
+      return [this.form.name + "@yahoo.com", this.form.name + "@yahoo.com.tw", this.form.name + "@gmail.com", this.form.name + "@msn.com", this.form.name + "@hotmail.com"];
+    },
+  },
   setup() {
     return {
       value: ref(null),

@@ -6,35 +6,31 @@
       <!--  ----------  -->
       <div :class="{ StepHidden: step1 }" class="bg flex h-screen">
         <!--圖片-->
-        <div class="hidden w-2/3 lg:block">
-          <div class="vertical absolute left-32 w-1/2">
-            <Vue3Lottie :animationData="LoginAnimation" class="h-full w-full" />
-          </div>
+        <div class="vertical absolute left-32 hidden w-1/2 lg:block">
+          <Vue3Lottie :animationData="LoginAnimation" class="h-full w-full" />
         </div>
         <!--登入表格-->
-        <div class="w-screen items-center bg-white p-7 lg:w-1/3 lg:p-10">
-          <div class="vertical relative w-full">
-            <h3 class="mb-4 text-center text-xl text-2xl font-semibold sm:mb-6">註冊</h3>
-            <n-form ref="formRef" label-placement="top" :model="form" :rules="rules">
-              <n-form-item label="手機號碼" path="phone">
-                <n-input v-model:value="form.phone" placeholder="請輸入手機號碼" clearable />
-              </n-form-item>
-              <n-button type="info" class="w-full" size="large" strong @click="submitForm('formRef')">註冊</n-button>
+        <div class="vertical absolute right-0 w-screen rounded-none bg-white p-7 shadow-none lg:right-32 lg:w-96 lg:rounded-2xl lg:p-10 lg:shadow-2xl">
+          <h3 class="mb-4 text-center text-xl text-2xl font-semibold sm:mb-6">註冊特約商</h3>
+          <n-form ref="formRef" label-placement="top" :model="form" :rules="rules">
+            <n-form-item label="手機號碼" path="phone">
+              <n-input v-model:value="form.phone" placeholder="請輸入手機號碼" clearable />
+            </n-form-item>
+            <n-button type="info" class="w-full" size="large" strong @click="submitForm('formRef')">註冊</n-button>
 
-              <div class="mt-4">
-                <div>點擊「下一步」繼續註冊<br />即表示您已閱讀並同意億集的 <a href="/termsOfService" target="_blank" class="text-blue-500">註冊服務條款</a></div>
+            <div class="mt-4">
+              <div>點擊「下一步」繼續註冊<br />即表示您已閱讀並同意億集的 <a href="/termsOfService" target="_blank" class="text-blue-500">註冊服務條款</a></div>
+            </div>
+
+            <n-divider>或</n-divider>
+
+            <div class="mt-5 flex w-full items-center justify-center">
+              <div>已經有帳號了嗎？</div>
+              <div class="text-left">
+                <n-button quaternary type="info" @click="$router.push('/vendor_login')">登入</n-button>
               </div>
-
-              <n-divider>或</n-divider>
-
-              <div class="mt-5 flex w-full items-center justify-center">
-                <div>已經有帳號了嗎？</div>
-                <div class="text-left">
-                  <n-button quaternary type="info" @click="$router.push('/manage_login')">登入</n-button>
-                </div>
-              </div>
-            </n-form>
-          </div>
+            </div>
+          </n-form>
         </div>
       </div>
       <!--  ----------  -->
@@ -148,7 +144,7 @@
                 </div>
                 <!--按鈕-->
                 <div class="w-full">
-                  <n-button v-if="current === 3" type="info" size="large" @click="$router.push('/manage_login')" class="w-full"> 完成 </n-button>
+                  <n-button v-if="current === 3" type="info" size="large" @click="$router.push('/vendor_login')" class="w-full"> 完成 </n-button>
                   <!--<n-button v-if="current === 3" quaternary size="large" @click="submitFormBack(2)"> 返回上一步 </n-button>-->
                 </div>
               </div>
@@ -157,16 +153,15 @@
         </n-space>
       </div>
     </div>
-
     <footer class="stepBg flex h-10 w-screen justify-center text-center" :class="{ footerStep: step2 }">Copyright © 2022 EZTIT Inc</footer>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent } from "vue";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 import doneImage from "@/assets/done.svg";
-const LoginAnimation = require("@/js/Lottie/manage_login.json");
+const LoginAnimation = require("@/js/Lottie/login.json");
 const DoneAnimation = require("@/js/Lottie/particle.json");
 export default defineComponent({
   components: {
@@ -432,7 +427,7 @@ export default defineComponent({
 
 @media (min-width: 1024px) {
   .bg {
-    background-color: #407bff;
+    background-color: #e9ebee;
   }
   .n-steps .n-step:not(:last-child) {
     margin-right: 50px;

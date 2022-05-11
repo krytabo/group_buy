@@ -13,21 +13,21 @@
           <n-input v-model:value="form.name" placeholder="請輸入帳號" />
         </n-form-item>
         <n-form-item label="密碼" path="user.age">
-          <n-input v-model:value="form.password" placeholder="請輸入密碼" />
+          <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入密碼" clearable />
         </n-form-item>
         <div class="flex w-full">
           <n-checkbox v-model:checked="form.isRead">記住我</n-checkbox>
           <div class="flex-1 text-right">
-            <n-button quaternary type="info">忘記密碼？</n-button>
+            <n-button quaternary type="info" @click="$router.push('/forgotPwd')">忘記密碼？</n-button>
           </div>
         </div>
 
-        <n-button type="info" class="w-full" size="large" strong @click="$router.push('Backstage')">登入</n-button>
+        <n-button type="info" class="w-full" size="large" strong @click="userLogin">登入</n-button>
 
         <div class="mt-5 flex w-full items-center justify-center">
           <div>還沒有帳號？</div>
           <div class="text-left">
-            <n-button quaternary type="info">立即註冊</n-button>
+            <n-button quaternary type="info" @click="$router.push('/signup')">立即註冊</n-button>
           </div>
         </div>
 
@@ -45,6 +45,7 @@
 import { defineComponent, ref } from "vue";
 import Lottie from "vue-lottie";
 import LoginAnimation from "@/js/Lottie/login.json";
+import { firebaseAuth } from "@/configured/firebaseConfig.js";
 
 export default defineComponent({
   components: {
@@ -64,7 +65,18 @@ export default defineComponent({
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    userLogin() {
+      firebaseAuth
+        .signInWithEmailAndPassword(this.form.name, this.form.password)
+        .then(() => {
+          this.$router.push("/backstage");
+        })
+        .catch((error) => {
+          console.log('錯誤')
+        });
+    },
+  },
   setup() {
     return {
       value: ref(null),

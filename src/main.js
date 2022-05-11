@@ -13,6 +13,9 @@ import zhTW from "naive-ui";
 import Vue3Lottie from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
 import "uikit/dist/css/uikit.css";
