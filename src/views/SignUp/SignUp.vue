@@ -83,10 +83,10 @@
                   <p class="text-xl font-black">請填寫資料</p>
                   <n-form ref="stepRef" label-placement="left" label-width="80" label-align="left" require-mark-placement="right" :model="form" :rules="rules">
                     <p class="pt-5 text-left text-base font-bold">基本資訊</p>
-                    <n-form-item label="姓名" path="addAccount.name">
+                    <n-form-item label="姓名" path="name">
                       <n-input v-model:value="form.name" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="電子信箱" path="addAccount.mail">
+                    <n-form-item label="電子信箱" path="mail">
                       <!--<n-input v-model:value="form.addAccount.mail" type="text" placeholder="請輸入內容" clearable />-->
                       <n-auto-complete v-model:value="form.mail" :input-props="{ autocomplete: 'disabled' }" :options="options">
                         <template #default="{ handleInput, handleBlur, handleFocus, value: slotValue }">
@@ -94,54 +94,52 @@
                         </template>
                       </n-auto-complete>
                     </n-form-item>
-                    <n-form-item label="密碼" path="addAccount.password" class="pwd">
-                      <!--<n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入內容" clearable />-->
-                      <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入內容" :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}" clearable />
+                    <n-form-item label="密碼" path="password">
+                      <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入內容" clearable />
+                      <!--<n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入內容" :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}" clearable />
 
-                      <div class="flex flex-wrap">
-                        <div class="flex">
-                          <div class="contents">
-                            <div class="bullet-pass-hor" :class="{'active' : passValid > 0}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
-                            <div class="bullet-pass-hor" :class="{'active' : passValid > 1}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
-                            <div class="bullet-pass-hor" :class="{'active' : passValid > 2}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
-                            {{ passValid.length }}
-                          </div>
+                      <div class="flex flex-col">
+                        <div class="flex my-4 flex-auto">
+                          <div class="bullet-pass-hor" :class="{'active' : passValid > 0}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
+                          <div class="bullet-pass-hor" :class="{'active' : passValid > 1}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
+                          <div class="bullet-pass-hor" :class="{'active' : passValid > 2}"><span :class="{'green' : passValid === 3, 'yellow' : passValid === 2, 'orange' : passValid === 1}"></span></div>
+                          {{ passValid.length }}
                         </div>
-                        <div class="grid">
-                          <span class="d-block bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': minLength, 'orange': !minLength && form.password.length > 0}" aria-hidden="true"></span> At least 6 characters</span>
-                          <span class="d-block bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': hasNumber, 'orange': !hasNumber && form.password.length > 0}" aria-hidden="true"></span> At least 1 number</span>
-                          <span class="d-block bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': hasUpperCase, 'orange': !hasUpperCase && form.password.length > 0}" aria-hidden="true"></span> At least 1 uppercase letter</span>
+                        <div class="flex flex-col">
+                          <span class="text-left bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': minLength, 'orange': !minLength && this.form.password.length > 0}" aria-hidden="true"></span> 最少6個字元</span>
+                          <span class="text-left bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': hasNumber, 'orange': !hasNumber && this.form.password.length > 0}" aria-hidden="true"></span> At least 1 number</span>
+                          <span class="text-left bullet-pass-rounded"><span class="fa fa-circle" :class="{'active': hasUpperCase, 'orange': !hasUpperCase && this.form.password.length > 0}" aria-hidden="true"></span> At least 1 uppercase letter</span>
                         </div>
-                      </div>
+                      </div>-->
                     </n-form-item>
 
-                    <n-form-item label="密碼" path="addAccount.confirmPwd">
+                    <n-form-item label="密碼" path="confirmPwd">
                       <n-input v-model:value="form.confirmPwd" type="password" show-password-on="click" placeholder="請輸入內容" clearable />
                     </n-form-item>
                     <p class="pt-5 text-left text-base font-bold">企業資訊</p>
-                    <n-form-item label="公司名稱" path="addAccount.companyName">
+                    <n-form-item label="公司名稱" path="companyName">
                       <n-input v-model:value="form.companyName" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="統一編號" path="addAccount.taxNumber">
+                    <n-form-item label="統一編號" path="taxNumber">
                       <n-input v-model:value="form.companyTaxNumber" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="公司地址" path="addAccount.address">
+                    <n-form-item label="公司地址" path="address">
                       <n-input v-model:value="form.companyAddress" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="公司電話" path="addAccount.phone">
+                    <n-form-item label="公司電話" path="phone">
                       <n-input v-model:value="form.companyPhone" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="公司傳真" path="addAccount.fax">
+                    <n-form-item label="公司傳真" path="fax">
                       <n-input v-model:value="form.companyFax" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
-                    <n-form-item label="公司官網" path="addAccount.website">
+                    <n-form-item label="公司官網" path="website">
                       <n-input v-model:value="form.companyWebsite" type="textarea" :autosize="{ maxRows: 1 }" placeholder="請輸入內容" clearable />
                     </n-form-item>
                   </n-form>
                 </div>
                 <!--按鈕-->
                 <div class="w-full">
-                  <n-button v-if="current === 2" type="info" size="large" @click="submitFormNext('stepRef')" class="w-full"> 送出 </n-button>
+                  <n-button v-if="current === 2" type="info" size="large" @click="userRegistration" class="w-full"> 送出 </n-button>
                   <!--<n-button v-if="current === 2" quaternary size="large" @click="submitFormBack(1)" class="w-full"> 返回上一步 </n-button>-->
                 </div>
               </div>
@@ -158,7 +156,7 @@
                 </div>
                 <!--按鈕-->
                 <div class="w-full">
-                  <n-button v-if="current === 3" type="info" size="large" @click="userRegistration" class="w-full"> 完成 </n-button>
+                  <n-button v-if="current === 3" type="info" size="large" @click="$router.push('/login')" class="w-full"> 完成 </n-button>
                   <!--<n-button v-if="current === 3" quaternary size="large" @click="submitFormBack(2)"> 返回上一步 </n-button>-->
                 </div>
               </div>
@@ -173,7 +171,7 @@
 
 <script>
 import { defineComponent } from "vue";
-import VueCountdown from "@chenfengyuan/vue-countdown";
+import VueCountdown from "@chenfengyuan/vue-countdown"; //倒數計時
 import doneImage from "@/assets/done.svg";
 import { firebaseAuth } from "@/configured/firebaseConfig.js";
 
@@ -201,7 +199,7 @@ export default defineComponent({
     const validatePass2 = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("請再輸入一次密碼"));
-      } else if (value !== this.form.addAccount.password) {
+      } else if (value !== this.form.password) {
         callback(new Error("兩次密碼不同，請重新輸入"));
       } else {
         callback();
@@ -353,7 +351,11 @@ export default defineComponent({
               displayName: this.form.name,
             })
             .then(() => {
-              this.$router.push("/login");
+              // this.$router.push("/login");
+
+              this.$refs["stepRef"].validate
+                if (this.current++ > 2) this.current = 0;
+
             });
         })
         .catch((error) => {
@@ -375,7 +377,7 @@ export default defineComponent({
     },
 
     //密碼驗證
-    hasNumber() {
+    /*hasNumber() {
       return /\d/.test(this.form.password)
     },
     hasLowerCase() {
@@ -385,7 +387,7 @@ export default defineComponent({
       return /[A-Z]/.test(this.form.password)
     },
     minLength() {
-      return this.form.password.length > 5
+      return this.form.password.length > 6
     },
     passValid() {
       let value = 0
@@ -394,7 +396,7 @@ export default defineComponent({
       if (this.hasUpperCase) value += 1
       if (this.minLength) value += 1
       return value
-    },
+    },*/
     
   },
   setup() {
@@ -407,140 +409,141 @@ export default defineComponent({
 </script>
 
 <style lang="postcss"></style>
+
 <style lang="scss">
-.footerStep {
-  position: absolute;
-  bottom: 0px;
-  background: none !important;
-}
-.n-steps {
-  .n-step {
-    flex: none;
-    display: block;
+  .footerStep {
+    position: absolute;
+    bottom: 0px;
+    background: none !important;
+  }
+  .n-steps {
+    .n-step {
+      flex: none;
+      display: block;
 
-    &:not(:last-child) {
-      margin-right: 30px;
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+
+    .n-step-indicator {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
+
+    .n-step-splitor {
+      display: none;
+    }
+
+    .n-step-content.n-step-content-header {
+      margin: 0 !important;
     }
   }
 
-  .n-step-indicator {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+  .StepHidden {
+    display: none !important;
   }
-
-  .n-step-splitor {
-    display: none;
-  }
-
-  .n-step-content.n-step-content-header {
-    margin: 0 !important;
-  }
-}
-
-.StepHidden {
-  display: none !important;
-}
-.n-input-number {
-  width: 100%;
-}
-.horizontally {
-  //垂直置中
-  left: 50%;
-  transform: translatex(-50%);
-}
-.vertical {
-  //水平置中
-  top: 50%;
-  transform: translateY(-50%);
-}
-.v_h {
-  //完全置中
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.stepBg {
-  background: #ffffff;
-}
-
-/*.step-none-title .n-form-item.n-form-item--top-labelled {
-  grid-template-areas:
-    "blank"
-    "feedback";
-}*/
-
-@media (min-width: 1024px) {
-  .bg {
-    background-color: #e9ebee;
-  }
-  .n-steps .n-step:not(:last-child) {
-    margin-right: 50px;
-  }
-  .stepBg {
-    background: #e9ebee;
-  }
-}
-
-.pwd .n-form-item-blank {
-  display: block;
-}
-
-.form-newaccount__bullet-steps {
-  margin-bottom: 13px;
-  margin-top: 8px;
-}
-
-.bullet-pass-rounded {
-  color: #828282;
-  display: inline-block;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.bullet-pass-rounded .fa.active {
-  color: #1ed699;
-}
-
-.bullet-pass-hor {
-  height: 8px;
-  width: 100%;
-  transition: all ease 400ms;
-
-  span {
-    background-color: #ededed;
-    display: block;
-    height: 100%;
+  .n-input-number {
     width: 100%;
+  }
+  .horizontally {
+    //垂直置中
+    left: 50%;
+    transform: translatex(-50%);
+  }
+  .vertical {
+    //水平置中
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .v_h {
+    //完全置中
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
 
-    &.orange {
-      background-color: #f26623;
+  .stepBg {
+    background: #ffffff;
+  }
+
+  /*.step-none-title .n-form-item.n-form-item--top-labelled {
+    grid-template-areas:
+      "blank"
+      "feedback";
+  }*/
+
+  @media (min-width: 1024px) {
+    .bg {
+      background-color: #e9ebee;
     }
-    &.yellow {
-      background-color: #f1b821;
+    .n-steps .n-step:not(:last-child) {
+      margin-right: 50px;
     }
-    &.green {
-      background-color: #1ed699;
+    .stepBg {
+      background: #e9ebee;
     }
   }
-}
 
-.bullet-pass-hor:nth-child(2) {
-  margin: 0 8px;
-}
+  /*.pwd .n-form-item-blank {
+    display: block;
+  }
 
-.bullet-pass-hor {
-  &:nth-child(2),
-  &:nth-child(3) {
-    .orange {
-      background-color: #f26623;
+  .form-newaccount__bullet-steps {
+    margin-bottom: 13px;
+    margin-top: 8px;
+  }
+
+  .bullet-pass-rounded {
+    color: #828282;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .bullet-pass-rounded .fas.active {
+    color: #1ed699;
+  }
+
+  .bullet-pass-hor {
+    height: 8px;
+    width: 100%;
+    transition: all ease 400ms;
+
+    span {
+      background-color: #ededed;
+      display: block;
+      height: 100%;
+      width: 100%;
+
+      &.orange {
+        background-color: #f26623;
+      }
+      &.yellow {
+        background-color: #f1b821;
+      }
+      &.green {
+        background-color: #1ed699;
+      }
     }
   }
-  &:nth-child(3) {
-    .yellow {
-      background-color: #f1b821;
-    }
+
+  .bullet-pass-hor:nth-child(2) {
+    margin: 0 8px;
   }
-}
+
+  .bullet-pass-hor {
+    &:nth-child(2),
+    &:nth-child(3) {
+      .orange {
+        background-color: #f26623;
+      }
+    }
+    &:nth-child(3) {
+      .yellow {
+        background-color: #f1b821;
+      }
+    }
+  }*/
 </style>

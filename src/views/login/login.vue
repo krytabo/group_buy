@@ -73,6 +73,9 @@ export default defineComponent({
           this.$router.push("/backstage");
         })
         .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error(errorCode, errorMessage)
           console.log('錯誤')
         });
     },

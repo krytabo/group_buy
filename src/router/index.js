@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import firebase from "firebase/compat/app";
+import "../configured/firebaseConfig";
+import { firebaseAuth } from "@/configured/firebaseConfig";
 // import Home from "../views/Home.vue";
 
 const routes = [
@@ -56,6 +59,9 @@ const routes = [
     path: "/backstage", //賣家中心-首頁
     name: "Backstage",
     component: () => import("@/views/Backstage"),
+    meta: {
+      authRequired: true,
+    },
   },
   {
     path: "/seller", //賣家中心-首頁
@@ -173,5 +179,42 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const currentUser = firebaseAuth.currentUser;
+
+  if (requiresAuth && !currentUser) {
+    next("/login");
+  } else if (requiresAuth && currentUser) {
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+/*router.beforeEach((to, from, next) => {
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next("/login");
+  else if (!requiresAuth && currentUser) next("/");
+  else next();
+});*/
+
+/*router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.authRequired)) {
+    if (firebase.auth().currentUser) {
+      next("/");
+    } else {
+      alert("You must be logged in to see this page");
+      next({
+        path: "/login",
+      });
+    }
+  } else {
+    next();
+  }
+});*/
 
 export default router;

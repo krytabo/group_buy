@@ -1,11 +1,11 @@
 <template>
   <div class="flex min-h-screen flex-col">
     <div class="bg flex h-screen items-center justify-center">
-      <!--登入表格-->
-      <div class="vertical  w-screen rounded-none bg-white p-7 shadow-none lg:right-32 lg:w-96 lg:rounded-2xl lg:p-10 lg:shadow-2xl">
+      <!--輸入信箱-->
+      <div :class="{ StepHidden: step1 }" class="vertical w-screen rounded-none bg-white p-7 shadow-none lg:right-32 lg:w-96 lg:rounded-2xl lg:p-10 lg:shadow-2xl">
         <h3 class="mb-4 text-center text-xl text-2xl font-semibold sm:mb-6">忘記密碼</h3>
         <n-form ref="formRef" label-placement="top" :model="form" :rules="rules">
-          <n-form-item label="電子信箱" path="phone">
+          <n-form-item label="電子信箱" path="mail">
             <n-auto-complete v-model:value="form.mail" :input-props="{ autocomplete: 'disabled' }" :options="options">
               <template #default="{ handleInput, handleBlur, handleFocus, value: slotValue }">
                 <n-input type="textarea" :autosize="{ maxRows: 1 }" :value="slotValue" placeholder="請輸入帳號" @input="handleInput" @focus="handleFocus" @blur="handleBlur" clearable />
@@ -24,11 +24,25 @@
           </div>
         </n-form>
       </div>
+
+      <!--送出重設密碼-->
+      <div :class="{ StepHidden: step2 }" class="vertical w-screen rounded-none bg-white p-7 shadow-none lg:right-32 lg:w-96 lg:rounded-2xl lg:p-10 lg:shadow-2xl">
+        <n-result status="success" size="large">
+          <template #default>
+            <h3 class="mb-4 text-center text-xl text-2xl font-semibold sm:mb-6">申請成功</h3>
+            <p>幾分後您將收到重置密碼的電子郵件</p>
+          </template>
+          <template #footer>
+            <n-button type="info" @click="$router.push('/login')" class="w-full" size="large" strong>返回登入</n-button>
+          </template>
+        </n-result>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+
   import VueCountdown from "@chenfengyuan/vue-countdown";
   import { firebaseAuth } from "@/configured/firebaseConfig.js";
 
@@ -40,7 +54,21 @@
     },
     name: "",
     data() {
+      const validatePass = (rule, value, callback) => {
+        // var reg1 = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,15}$/; //英文加數字，6~15個字元
+        var reg1 = /^[0-9A-Za-z]{6,15}$/; //不限英文或數字，6~15個字元
+        if (value === "") {
+          callback(new Error("請輸入密碼"));
+        } else if (!reg1.test(value)) {
+          callback(new Error("密碼必須是6～15個字元"));
+        } else {
+          callback();
+        }
+      };
+
       return {
+        step1: false,
+        step2: true,
         form:{
           mail:""
         },
@@ -59,12 +87,14 @@
     methods:{
       forgetPassword() {
         firebaseAuth
-          .sendPasswordResetEmail(this.form.email)
+          .sendPasswordResetEmail(this.form.mail)
           .then(() => {
-            alert('請查看您的信箱以重設密碼')
+            /*alert('請查看您的信箱以重設密碼')
             this.user = {
               email: ''
-            }
+            }*/
+            this.step1 = !this.step1;
+            this.step2 = !this.step2;
           }).catch((error) => {
           console.log("錯誤",error)
         })
@@ -92,5 +122,10 @@
 </script>
 
 <style lang="scss">
-
+  .StepHidden {
+    display: none !important;
+  }
+  .bg {
+    background-color: #e9ebee;
+  }
 </style>

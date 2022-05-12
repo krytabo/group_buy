@@ -23,9 +23,24 @@
           </n-popselect>-->
 
           <!--用戶-->
-          <div class="header-btn">
-            <UserCircleIcon class="h-5 w-5"></UserCircleIcon>
-          </div>
+          <n-popover trigger="click" style="width: 200px" class="p-0">
+            <template #trigger>
+              <div class="header-btn">
+                <UserCircleIcon class="h-5 w-5"></UserCircleIcon>
+              </div>
+            </template>
+            <!--選單內容-->
+            <div class="p-3">
+              <p class="mb-0 p-3">會員名稱：<span class="text-green-500">{{user.displayName}}</span></p>
+              <div class="news-list flex cursor-pointer space-x-4 rounded p-3 hover:bg-gray-100">
+               會員資料
+              </div>
+              <div class="news-list flex cursor-pointer space-x-4 rounded p-3 hover:bg-gray-100" @click="logOut">
+                會員登出
+              </div>
+            </div>
+          </n-popover>
+
           <!--通知-->
           <n-badge :value="NewsBadge" :max="15">
             <n-popover trigger="click" style="width: 380px" class="p-0">
@@ -230,10 +245,34 @@ import { RouterLink } from "vue-router";
 import { zhTW, dateZhTW } from "naive-ui";
 import { CogIcon, UserCircleIcon } from "@heroicons/vue/outline";
 import SellerDashboard from "@/components/Seller/Dashboard/index";
+import { firebaseAuth } from "@/configured/firebaseConfig.js";
 
 export default {
   name: "Home",
   components: { CogIcon, UserCircleIcon, SellerDashboard },
+  data() {
+    return {
+      user: null
+    }
+  },
+  created() {
+    firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
+  },
+  methods:{
+    logOut() {
+      firebaseAuth.signOut().then(() => {
+        firebaseAuth.onAuthStateChanged(() => {
+          this.$router.push('/login')
+        })
+      })
+    }
+  },
   setup() {
     const menuOptions = [
       {
