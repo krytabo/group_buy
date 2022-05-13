@@ -235,32 +235,32 @@
         <p class="m-o text-left">商品分類</p>
         <div class="space-y-4">
 
-          <!--<div class="classifyMenu"   v-for="(item, index) in classifyMeny" :key="index" :active="index === activeIndex" @click="filt = ([item.file])">
+          <!--<div class="classifyMenu"   v-for="(item, index) in classifyMoney" :key="index" :active="index === activeIndex" @click="filterType = ([item.filterType])">
             <i class="text-xl" :class="item.icon"></i>
             <p class="m-0">{{ item.name }}</p>
           </div>-->
 
-          <div @click="filt = 'all'" class="classifyMenu uk-active">
+          <div @click="filterType = 'all'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">所有分類</p>
           </div>
-          <div @click="filt = 'food'" class="classifyMenu">
+          <div @click="filterType = 'food'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">美食生鮮</p>
           </div>
-          <div @click="filt = 'technology'" class="classifyMenu">
+          <div @click="filterType = 'technology'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">創意科技</p>
           </div>
-          <div @click="filt = 'health'" class="classifyMenu">
+          <div @click="filterType = 'health'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">美妝保健</p>
           </div>
-          <div @click="filt = 'travel'" class="classifyMenu">
+          <div @click="filterType = 'travel'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">旅遊行程</p>
           </div>
-          <div @click="filt = 'life'" class="classifyMenu">
+          <div @click="filterType = 'life'" class="classifyMenu">
             <i class="ri-apps-line text-xl"></i>
             <p class="m-0">品味生活</p>
           </div>
@@ -425,43 +425,43 @@ export default {
           class:"technology"
         }
       ],
-      filt: 'all',
-      classifyMeny:[
+      filterType: 'all',
+      classifyMoney:[
         {
           id:1,
           name:"所有分類",
           icon:"ri-apps-line",
-          file:"all"
+          filterType:"all"
         },
         {
           id:2,
           name:"美食生鮮",
           icon:"ri-apps-line",
-          file:"food"
+          filterType:"food"
         },
         {
           id:3,
           name:"創意科技",
           icon:"ri-apps-line",
-          file:"technology"
+          filterType:"technology"
         },
         {
           id:4,
           name:"美妝保健",
           icon:"ri-apps-line",
-          file:"health"
+          filterType:"health"
         },
         {
           id:5,
           name:"旅遊行程",
           icon:"ri-apps-line",
-          file:"travel"
+          filterType:"travel"
         },
         {
           id:6,
           name:"品味生活",
           icon:"ri-apps-line",
-          file:"life"
+          filterType:"life"
         },
 
       ],
@@ -473,10 +473,10 @@ export default {
       console.log('filtered');
       let result;
 
-      if  (this.filt !== 'all'){
-        const filt = this.filt;
+      if  (this.filterType !== 'all'){
+        const filterType = this.filterType;
         result = this.buy_item.filter(function (a) {
-          return a.class === filt
+          return a.class === filterType
         });
 
       } else {
