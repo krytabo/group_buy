@@ -181,33 +181,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  const currentUser = firebaseAuth.currentUser;
-
-  if (requiresAuth && !currentUser) {
-    next("/login");
-  } else if (requiresAuth && currentUser) {
-    next("/login");
-  } else {
-    next();
-  }
-});
-
-/*router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser;
-  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-
-  if (requiresAuth && !currentUser) next("/login");
-  else if (!requiresAuth && currentUser) next("/");
-  else next();
-});*/
-
-/*router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.authRequired)) {
     if (firebase.auth().currentUser) {
-      next("/");
+      next();
     } else {
-      alert("You must be logged in to see this page");
+      // alert("You must be logged in to see this page");
+      // this.$swal("Oops...", "Algum erro aconteceu!", "error");
       next({
         path: "/login",
       });
@@ -215,6 +194,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-});*/
+});
 
 export default router;

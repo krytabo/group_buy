@@ -89,10 +89,6 @@
         firebaseAuth
           .sendPasswordResetEmail(this.form.mail)
           .then(() => {
-            /*alert('請查看您的信箱以重設密碼')
-            this.user = {
-              email: ''
-            }*/
             this.step1 = !this.step1;
             this.step2 = !this.step2;
           }).catch((error) => {

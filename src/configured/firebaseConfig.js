@@ -1,12 +1,7 @@
-// import * as firebase from "firebase";
-// import * as firebase from "firebase/compat/app"
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/analytics";
 import "firebase/compat/firestore";
-
-/*import firebase from "firebase/app";
-import "firebase/firestore";*/
 
 const firebaseConfig = {
   apiKey: "AIzaSyC8yCo2uIMVIXVDnUIPTTK9J1ziKWqB2jU",
@@ -27,7 +22,7 @@ export const db = firebase.firestore();*/
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const db = firebaseApp;
-
 export const firebaseAuth = firebase.auth();
 
-firebase.auth().languageCode = "it";
+firebaseAuth.languageCode = "it";
+firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);

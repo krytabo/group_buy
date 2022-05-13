@@ -9,14 +9,14 @@
       <h3 class="mb-4 text-center text-xl text-2xl font-semibold sm:mb-6">登入賣家中心</h3>
 
       <n-form ref="formRef" label-placement="top" :model="form">
-        <n-form-item label="帳號" path="user.name">
+        <n-form-item label="帳號" path="name">
           <n-input v-model:value="form.name" placeholder="請輸入帳號" />
         </n-form-item>
-        <n-form-item label="密碼" path="user.age">
-          <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入密碼" clearable />
+        <n-form-item label="密碼" path="password">
+          <n-input v-model:value="form.password" type="password" show-password-on="click" placeholder="請輸入密碼2" clearable />
         </n-form-item>
         <div class="flex w-full">
-          <n-checkbox v-model:checked="form.isRead">記住我</n-checkbox>
+          <n-checkbox v-model:checked="form.remember" @click="remember">記住我</n-checkbox>
           <div class="flex-1 text-right">
             <n-button quaternary type="info" @click="$router.push('/forgotPwd')">忘記密碼？</n-button>
           </div>
@@ -46,6 +46,7 @@ import { defineComponent, ref } from "vue";
 import Lottie from "vue-lottie";
 import LoginAnimation from "@/js/Lottie/login.json";
 import { firebaseAuth } from "@/configured/firebaseConfig.js";
+import firebase from "firebase/compat";
 
 export default defineComponent({
   components: {
@@ -59,25 +60,51 @@ export default defineComponent({
         {
           name: "",
           password: "",
-          isRead: false,
+          remember: false,
         },
       ],
     };
   },
   mounted() {},
   methods: {
-    userLogin() {
+   /* remember(){
       firebaseAuth
-        .signInWithEmailAndPassword(this.form.name, this.form.password)
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(() => {
-          this.$router.push("/backstage");
+          // Existing and future Auth states are now persisted in the current
+          // session only. Closing the window would clear any existing state even
+          // if a user forgets to sign out.
+          // ...
+          // New sign-in will be persisted with session persistence.
+          return firebase.auth().signInWithEmailAndPassword(this.form.name, this.form.password);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error(errorCode, errorMessage)
-          console.log('錯誤')
+          // Handle Errors here.
         });
+    },*/
+    userLogin() {
+      firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          return firebase.auth().signInWithEmailAndPassword(this.form.name, this.form.password)
+        .then(() => {
+            /*if( this.form.remember) {
+              let password = Base64.encode(this.form.password);
+              localStorage.setItem("name",this.form.name);
+              localStorage.setItem("password",password);
+            }
+            else {
+              localStorage.removeItem("name");
+              localStorage.removeItem("password");
+            }*/
+            this.$router.push("/backstage");
+          })
+            .catch(() => {
+              console.log('錯誤')
+              this.$swal("Oops...", "帳號密碼錯誤，請重新輸入", "error");
+            });
+        })
+        .catch(() => {});
+
     },
   },
   setup() {
