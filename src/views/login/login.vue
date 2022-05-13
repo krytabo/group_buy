@@ -85,8 +85,8 @@ export default defineComponent({
     userLogin() {
       firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(() => {
-          return firebase.auth().signInWithEmailAndPassword(this.form.name, this.form.password)
-        .then(() => {
+          return firebaseAuth.signInWithEmailAndPassword(this.form.name, this.form.password)
+            .then(() => {
             /*if( this.form.remember) {
               let password = Base64.encode(this.form.password);
               localStorage.setItem("name",this.form.name);
@@ -96,8 +96,8 @@ export default defineComponent({
               localStorage.removeItem("name");
               localStorage.removeItem("password");
             }*/
-            this.$router.push("/backstage");
-          })
+              this.$router.push("/backstage");
+            })
             .catch(() => {
               console.log('錯誤')
               this.$swal("Oops...", "帳號密碼錯誤，請重新輸入", "error");

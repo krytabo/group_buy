@@ -88,7 +88,7 @@
             <CogIcon class="h-5 w-5"></CogIcon>
           </div>
 
-          <router-link to="/"><el-button type="text" class="h-full p-3 text-black hover:bg-gray-200"> 返回前台</el-button></router-link>
+          <n-button quaternary  @click="$router.push('/group_buy')" class="font-bold text-base">返回前台</n-button>
 
           <!--小螢幕選單-->
           <a href="javascript:" class="flex h-10 w-10 items-center justify-center rounded-md bg-white hover:bg-gray-200 md:hidden">

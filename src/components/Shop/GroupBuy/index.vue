@@ -119,7 +119,7 @@
         &lt;!&ndash;圖片&ndash;&gt;
         <div class="carousel-height mb-10 w-full overflow-hidden rounded-2xl shadow-2xl lg:mb-0 lg:w-1/2">
           <n-carousel show-arrow autoplay class="h-96 w-full lg:h-full">
-            <n-carousel-item v-for="item in photo">
+            <n-carousel-item v-for="item in banner">
               <img :src="item.src" class="carousel-img h-full w-full object-cover object-center" alt="" />
             </n-carousel-item>
           </n-carousel>
@@ -205,16 +205,286 @@
       </div>
     </section>
   </div>-->
-  <div style="height: 2000px"></div>
+  <div class="lg:p-20 p-2 space-y-28">
+    <!--輪播圖-->
+    <div class="carousel-height mb-10 w-full overflow-hidden rounded-2xl shadow-2xl lg:mb-0 mx-auto" style="height: 400px">
+      <n-carousel show-arrow autoplay dot-type="line"  class="w-full h-full">
+        <n-carousel-item v-for="item in banner">
+          <img :src="item.src" class="carousel-img h-full w-full object-cover object-center" alt="" />
+        </n-carousel-item>
+      </n-carousel>
+    </div>
+
+    <section>
+      <h2 class="text-2xl font-bold text-left">熱門精選</h2>
+      <div class="grid grid-cols-4 gap-4">
+        <div class="buy_itemCard" v-for="item in buy_item">
+          <img :src="item.img" alt="">
+          <div class="p-5 space-y-2">
+            <p class="buy_itemTitle">{{ item.title }}</p>
+            <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
+            <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="flex space-x-10">
+      <!--選單列表-->
+      <div class="w-auto" style="max-width: 100px;">
+        <p class="m-o text-left">商品分類</p>
+        <div class="space-y-4">
+
+          <!--<div class="classifyMenu"   v-for="(item, index) in classifyMeny" :key="index" :active="index === activeIndex" @click="filt = ([item.file])">
+            <i class="text-xl" :class="item.icon"></i>
+            <p class="m-0">{{ item.name }}</p>
+          </div>-->
+
+          <div @click="filt = 'all'" class="classifyMenu uk-active">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">所有分類</p>
+          </div>
+          <div @click="filt = 'food'" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">美食生鮮</p>
+          </div>
+          <div @click="filt = 'technology'" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">創意科技</p>
+          </div>
+          <div @click="filt = 'health'" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">美妝保健</p>
+          </div>
+          <div @click="filt = 'travel'" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">旅遊行程</p>
+          </div>
+          <div @click="filt = 'life'" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">品味生活</p>
+          </div>
+        </div>
+      </div>
+      <!--分類內容-->
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-left">所有分類</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="js-filter"  v-for="item in filteredItems" :class="item.class">
+            <div class="buy_itemCard">
+              <img :src="item.img" alt="">
+              <div class="p-5 space-y-2">
+                <p class="buy_itemTitle">{{ item.title }}</p>
+                <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
+                <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--<section class="flex space-x-10" uk-filter="target: .js-filter">
+      &lt;!&ndash;選單列表&ndash;&gt;
+      <div class="w-auto" style="max-width: 100px;">
+        <p class="m-o text-left">商品分類</p>
+        <div class="space-y-4">
+          <div uk-filter-control class="classifyMenu uk-active">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">所有分類</p>
+          </div>
+          <div uk-filter-control="[data-color='food']" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">美食生鮮</p>
+          </div>
+          <div uk-filter-control="[data-color='technology']" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">創意科技</p>
+          </div>
+          <div uk-filter-control="[data-color='health']" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">美妝保健</p>
+          </div>
+          <div uk-filter-control="[data-color='travel']" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">旅遊行程</p>
+          </div>
+          <div uk-filter-control="[data-color='life']" class="classifyMenu">
+            <i class="ri-apps-line text-xl"></i>
+            <p class="m-0">品味生活</p>
+          </div>
+        </div>
+      </div>
+      &lt;!&ndash;分類內容&ndash;&gt;
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-left">所有分類</h2>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="js-filter"  v-for="item in buy_item">
+            <div class="buy_itemCard" :data-color="item.class">
+              <img :src="item.img" alt="">
+              <div class="p-5 space-y-2">
+                <p class="buy_itemTitle">{{ item.title }}</p>
+                <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
+                <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>-->
+  </div>
 </template>
 
 <script>
 import { dateZhTW, zhTW } from "naive-ui";
+import { numberToCurrencyNo } from "@/js/numberToCurrency"; //金額自動千分位
 
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      numberToCurrencyNo, //金額自動千分位
+      // 照片輪播
+      banner: [
+        {
+          id: 1,
+          src: "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg",
+        },
+        {
+          id: 2,
+          src: "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg",
+        },
+        {
+          id: 3,
+          src: "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg",
+        },
+      ],
+      buy_item:[
+        {
+          img:require('@/assets/buyImage/pic1.jpeg'),
+          title:"日本Decole Concombre - 招福開運達摩貓系列",
+          hostRoom:"A001",
+          hostName:"張美美",
+          money:"249",
+          class:"life"
+        },
+        {
+          img:require('@/assets/buyImage/pic2.webp'),
+          title:"No.8 Sleep Tight | (草本花香) 安睡 - 天然精油按摩大豆蠟燭",
+          hostRoom:"A001",
+          hostName:"張美美",
+          money:"1160",
+          class:"life"
+        },
+        {
+          img:require('@/assets/buyImage/pic3.jpeg'),
+          title:"月球造型擴香石",
+          hostRoom:"A001",
+          hostName:"張美美",
+          money:"399",
+          class:"life"
+        },
+        {
+          img:require('@/assets/buyImage/pic4.jpeg'),
+          title:"小肥雞伴眠燈 CHICK NIGHT LAMP",
+          hostRoom:"A001",
+          hostName:"張美美",
+          money:"459",
+          class:"life"
+        },
+        {
+          img:require('@/assets/buyImage/pic5.png'),
+          title:"日暖暖電暖器｜極簡美學，1500W冬日瞬暖",
+          hostRoom:"A001",
+          hostName:"張美美",
+          money:"2980",
+          class:"technology"
+        },
+        {
+          img:require('@/assets/buyImage/pic6.png'),
+          title:"煎烤熱壓三明治機｜熱壓三明治、煎烤料理一機多用",
+          hostRoom:"A002",
+          hostName:"陳珊妮",
+          money:"2780",
+          class:"technology"
+        },
+        {
+          img:require('@/assets/buyImage/pic7.jpeg'),
+          title:"圓寶寶手動式料理機｜料理省時省力，送禮自用皆宜",
+          hostRoom:"A002",
+          hostName:"陳珊妮",
+          money:"398",
+          class:"technology"
+        },
+        {
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          class:"technology"
+        }
+      ],
+      filt: 'all',
+      classifyMeny:[
+        {
+          id:1,
+          name:"所有分類",
+          icon:"ri-apps-line",
+          file:"all"
+        },
+        {
+          id:2,
+          name:"美食生鮮",
+          icon:"ri-apps-line",
+          file:"food"
+        },
+        {
+          id:3,
+          name:"創意科技",
+          icon:"ri-apps-line",
+          file:"technology"
+        },
+        {
+          id:4,
+          name:"美妝保健",
+          icon:"ri-apps-line",
+          file:"health"
+        },
+        {
+          id:5,
+          name:"旅遊行程",
+          icon:"ri-apps-line",
+          file:"travel"
+        },
+        {
+          id:6,
+          name:"品味生活",
+          icon:"ri-apps-line",
+          file:"life"
+        },
+
+      ],
+      activeIndex:0
+    };
+  },
+  computed: {
+    filteredItems: function () {
+      console.log('filtered');
+      let result;
+
+      if  (this.filt !== 'all'){
+        const filt = this.filt;
+        result = this.buy_item.filter(function (a) {
+          return a.class === filt
+        });
+
+      } else {
+        result =  this.buy_item;
+      }
+
+      return result;
+    }
   },
   mounted() {},
   methods: {},
@@ -229,6 +499,22 @@ export default {
 </script>
 
 <style lang="postcss">
+    .classifyMenu {
+        @apply flex cursor-pointer items-center text-black hover:text-blue-500 p-2 hover:bg-gray-200 rounded-md space-x-4
+    }
+
+    .uk-active {
+        @apply bg-gray-200
+    }
+
+    .uk-active p,.uk-active i  {
+        @apply text-blue-500
+    }
+
+    .buy_itemCard {
+        @apply rounded-2xl hover:shadow-2xl bg-white cursor-pointer overflow-hidden
+    }
+
 .header-link-item {
   @apply focus:outline-none mr-4 text-base font-medium leading-6 text-white hover:text-gray-900 focus:text-gray-900;
 }
@@ -290,7 +576,49 @@ export default {
 }
 </style>
 <style lang="scss">
-.color {
-  color: #000;
-}
+  .color {
+    color: #000;
+  }
+
+  .carousel-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+  }
+
+  .buy_itemCard {
+    min-height: 413px;
+
+    img {
+      height: 270px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+
+    p{
+      margin: 0 ;
+      text-align: left;
+      font-size: 16px;
+    }
+
+    .buy_itemTitle {
+      overflow:hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      font-weight:800
+    }
+
+    .buy_itemHost {
+      color: #66666A;
+    }
+
+    .buy_itemMoney {
+      color: #003354;
+      font-weight:800
+    }
+  }
 </style>

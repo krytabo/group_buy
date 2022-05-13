@@ -59,9 +59,9 @@ const routes = [
     path: "/backstage", //賣家中心-首頁
     name: "Backstage",
     component: () => import("@/views/Backstage"),
-    meta: {
+    /*meta: {
       authRequired: true,
-    },
+    },*/
   },
   {
     path: "/seller", //賣家中心-首頁
