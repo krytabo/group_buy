@@ -205,7 +205,7 @@
       </div>
     </section>
   </div>-->
-  <div class="lg:p-20 p-2 space-y-28">
+  <div class="lg:p-20 p-2 space-y-28 lg:max-w-screen-2xl mx-auto">
     <!--輪播圖-->
     <div class="carousel-height mb-10 w-full overflow-hidden rounded-2xl shadow-2xl lg:mb-0 mx-auto" style="height: 400px">
       <n-carousel show-arrow autoplay dot-type="line"  class="w-full h-full">
@@ -235,103 +235,41 @@
         <p class="m-o text-left">商品分類</p>
         <div class="space-y-4">
 
-          <!--<div class="classifyMenu"   v-for="(item, index) in classifyMoney" :key="index" :active="index === activeIndex" @click="filterType = ([item.filterType])">
-            <i class="text-xl" :class="item.icon"></i>
-            <p class="m-0">{{ item.name }}</p>
-          </div>-->
-
-          <div @click="filterType = 'all'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">所有分類</p>
-          </div>
-          <div @click="filterType = 'food'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">美食生鮮</p>
-          </div>
-          <div @click="filterType = 'technology'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">創意科技</p>
-          </div>
-          <div @click="filterType = 'health'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">美妝保健</p>
-          </div>
-          <div @click="filterType = 'travel'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">旅遊行程</p>
-          </div>
-          <div @click="filterType = 'life'" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">品味生活</p>
+          <div class="filter button" v-for="(item, index) in classifyMoney" :key="index">
+            <label  class="plan">
+              <input type="radio" v-model="selectedCategory" :value="item.filterType" />
+              <div class="plan-content">
+                <i class="text-xl" :class="item.icon"></i>
+                <p class="m-0">{{ item.name }}</p>
+              </div>
+            </label>
           </div>
         </div>
       </div>
       <!--分類內容-->
       <div class="flex-1">
         <h2 class="text-2xl font-bold text-left">所有分類</h2>
-        <div class="grid grid-cols-4 gap-4">
-          <div class="js-filter"  v-for="item in filteredItems" :class="item.class">
-            <div class="buy_itemCard">
-              <img :src="item.img" alt="">
-              <div class="p-5 space-y-2">
-                <p class="buy_itemTitle">{{ item.title }}</p>
-                <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
-                <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+        <div v-if="!filteredPeople.length" class="w-full h-full flex">
+          <img class="m-auto opacity-70 w-36" src="../../../assets/empty.png" alt="">
+        </div>
+        <div v-else>
+          <div class="grid grid-cols-4 gap-4">
+            <div v-for="item in filteredPeople" :id="item.id" :key="item.id" :class="item.category">
+              <div class="buy_itemCard">
+                <img :src="item.img" alt="">
+                <div class="p-5 space-y-2">
+                  <p class="buy_itemTitle">{{ item.title }}</p>
+                  <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
+                  <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+                </div>
               </div>
             </div>
           </div>
+          <n-button strong secondary class="mt-10" :disabled="btnF" @click="loadMore" v-if="this.companiesVisible < this.buy_item.length">{{ buttonText }}</n-button>
         </div>
       </div>
     </section>
 
-    <!--<section class="flex space-x-10" uk-filter="target: .js-filter">
-      &lt;!&ndash;選單列表&ndash;&gt;
-      <div class="w-auto" style="max-width: 100px;">
-        <p class="m-o text-left">商品分類</p>
-        <div class="space-y-4">
-          <div uk-filter-control class="classifyMenu uk-active">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">所有分類</p>
-          </div>
-          <div uk-filter-control="[data-color='food']" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">美食生鮮</p>
-          </div>
-          <div uk-filter-control="[data-color='technology']" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">創意科技</p>
-          </div>
-          <div uk-filter-control="[data-color='health']" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">美妝保健</p>
-          </div>
-          <div uk-filter-control="[data-color='travel']" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">旅遊行程</p>
-          </div>
-          <div uk-filter-control="[data-color='life']" class="classifyMenu">
-            <i class="ri-apps-line text-xl"></i>
-            <p class="m-0">品味生活</p>
-          </div>
-        </div>
-      </div>
-      &lt;!&ndash;分類內容&ndash;&gt;
-      <div class="flex-1">
-        <h2 class="text-2xl font-bold text-left">所有分類</h2>
-        <div class="grid grid-cols-4 gap-4">
-          <div class="js-filter"  v-for="item in buy_item">
-            <div class="buy_itemCard" :data-color="item.class">
-              <img :src="item.img" alt="">
-              <div class="p-5 space-y-2">
-                <p class="buy_itemTitle">{{ item.title }}</p>
-                <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
-                <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>-->
   </div>
 </template>
 
@@ -361,77 +299,173 @@ export default {
       ],
       buy_item:[
         {
+          id:1,
           img:require('@/assets/buyImage/pic1.jpeg'),
           title:"日本Decole Concombre - 招福開運達摩貓系列",
           hostRoom:"A001",
           hostName:"張美美",
           money:"249",
-          class:"life"
+          category:"life"
         },
         {
+          id:2,
           img:require('@/assets/buyImage/pic2.webp'),
           title:"No.8 Sleep Tight | (草本花香) 安睡 - 天然精油按摩大豆蠟燭",
           hostRoom:"A001",
           hostName:"張美美",
           money:"1160",
-          class:"life"
+          category:"life"
         },
         {
+          id:3,
           img:require('@/assets/buyImage/pic3.jpeg'),
           title:"月球造型擴香石",
           hostRoom:"A001",
           hostName:"張美美",
           money:"399",
-          class:"life"
+          category:"life"
         },
         {
+          id:4,
           img:require('@/assets/buyImage/pic4.jpeg'),
           title:"小肥雞伴眠燈 CHICK NIGHT LAMP",
           hostRoom:"A001",
           hostName:"張美美",
           money:"459",
-          class:"life"
+          category:"life"
         },
         {
+          id:5,
           img:require('@/assets/buyImage/pic5.png'),
           title:"日暖暖電暖器｜極簡美學，1500W冬日瞬暖",
           hostRoom:"A001",
           hostName:"張美美",
           money:"2980",
-          class:"technology"
+          category:"technology"
         },
         {
+          id:6,
           img:require('@/assets/buyImage/pic6.png'),
           title:"煎烤熱壓三明治機｜熱壓三明治、煎烤料理一機多用",
           hostRoom:"A002",
           hostName:"陳珊妮",
           money:"2780",
-          class:"technology"
+          category:"technology"
         },
         {
+          id:7,
           img:require('@/assets/buyImage/pic7.jpeg'),
           title:"圓寶寶手動式料理機｜料理省時省力，送禮自用皆宜",
           hostRoom:"A002",
           hostName:"陳珊妮",
           money:"398",
-          class:"technology"
+          category:"technology"
         },
         {
+          id:8,
           img:require('@/assets/buyImage/pic8.jpeg'),
           title:"Cute-Cube 暖風機｜陶瓷電暖器",
           hostRoom:"A004",
           hostName:"黃溫妮",
           money:"2080",
-          class:"technology"
-        }
+          category:"technology"
+        },
+        {
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },{
+          id:9,
+          img:require('@/assets/buyImage/pic8.jpeg'),
+          title:"Cute-Cube 暖風機｜陶瓷電暖器",
+          hostRoom:"A004",
+          hostName:"黃溫妮",
+          money:"2080",
+          category:"technology"
+        },
       ],
-      filterType: 'all',
       classifyMoney:[
         {
           id:1,
           name:"所有分類",
           icon:"ri-apps-line",
-          filterType:"all"
+          filterType:"All"
         },
         {
           id:2,
@@ -465,29 +499,44 @@ export default {
         },
 
       ],
-      activeIndex:0
+      selectedCategory: "All",
+      companiesVisible:8,
+      buttonText:"更多",
+      btnF: false,
     };
   },
   computed: {
-    filteredItems: function () {
-      console.log('filtered');
-      let result;
-
-      if  (this.filterType !== 'all'){
-        const filterType = this.filterType;
-        result = this.buy_item.filter(function (a) {
-          return a.class === filterType
-        });
-
+    // 篩選
+    filteredPeople: function() {
+     // return this.buy_item.slice(0, this.companiesVisible)
+      const vm = this;
+      const category = vm.selectedCategory;
+      if(category === "All") {
+        return vm.buy_item.slice(0, vm.companiesVisible) ;
       } else {
-        result =  this.buy_item;
+        return vm.buy_item.filter(function(person) {
+          return person.category === category;
+        }).slice(0, vm.companiesVisible)
       }
+    },
 
-      return result;
-    }
   },
-  mounted() {},
-  methods: {},
+  mounted() {
+
+  },
+  methods: {
+    loadMore() {
+      this.btnF = true;
+      this.buttonText ="載入中..."
+      setTimeout(() => {
+        this.buttonText ="更多"
+        this.btnF = false;
+      }, 1000);
+      if (this.companiesVisible > this.buy_item.length) return;
+      this.companiesVisible = this.companiesVisible + 4;
+      // this.buttonText ="更多"
+    },
+  },
   beforeDestroy() {},
   setup() {
     return {
@@ -609,7 +658,8 @@ export default {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       white-space: normal;
-      font-weight:800
+      font-weight:800;
+      height: 50px;
     }
 
     .buy_itemHost {
@@ -619,6 +669,28 @@ export default {
     .buy_itemMoney {
       color: #003354;
       font-weight:800
+    }
+  }
+
+
+  .button {
+    .plan {
+      .plan-content {
+        background: #ffffff;
+        border-radius: 4px;
+        display: flex;
+        padding: 5px 10px;
+        align-items: center;
+        justify-content: center;
+      }
+      input {
+        display: none;
+      }
+      [type="radio"]:checked + .plan-content {
+        color: #409eff;
+        background: #ecf5ff;
+        border:1px solid #b3d8ff;
+      }
     }
   }
 </style>
