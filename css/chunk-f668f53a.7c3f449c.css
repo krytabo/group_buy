@@ -1,0 +1,1 @@
+.MaxHeight{height:calc(100vh - 10rem)}@media(min-width:1024px){.MaxHeight{height:calc(100vh - 5rem)!important}}main{top:2.5rem;width:100vw;padding-left:2.5rem;padding-right:2.5rem;text-align:center}footer{bottom:0;display:block;height:5rem;width:100vw}@media (min-width:1024px){footer{display:none}}
