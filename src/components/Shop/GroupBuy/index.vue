@@ -215,9 +215,9 @@
       </n-carousel>
     </div>
 
-    <section>
-      <h2 class="text-2xl font-bold text-left">熱門精選</h2>
-      <div class="grid grid-cols-4 gap-4">
+    <section class="hot">
+      <h2 class="text-2xl font-bold text-left mb-0">熱門精選</h2>
+      <n-carousel :slides-per-view="4" :space-between="20" :loop="false" draggable show-arrow>
         <div class="buy_itemCard" v-for="item in buy_item">
           <img :src="item.img" alt="">
           <div class="p-5 space-y-2">
@@ -226,7 +226,18 @@
             <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
           </div>
         </div>
-      </div>
+      </n-carousel>
+
+      <!--<div class="grid grid-cols-4 gap-4">
+        <div class="buy_itemCard" v-for="item in buy_item">
+          <img :src="item.img" alt="">
+          <div class="p-5 space-y-2">
+            <p class="buy_itemTitle">{{ item.title }}</p>
+            <p class="buy_itemHost">{{ item.hostRoom }} - {{ item.hostName}}</p>
+            <p class="buy_itemMoney">NT$ {{ numberToCurrencyNo(item.money) }}</p>
+          </div>
+        </div>
+      </div>-->
     </section>
 
     <section class="flex space-x-10">
@@ -278,6 +289,8 @@ import { dateZhTW, zhTW } from "naive-ui";
 import { numberToCurrencyNo } from "@/js/numberToCurrency"; //金額自動千分位
 
 export default {
+  components: {
+  },
   name: "",
   data() {
     return {
@@ -547,7 +560,7 @@ export default {
 };
 </script>
 
-<style lang="postcss">
+<style lang="postcss" >
     .classifyMenu {
         @apply flex cursor-pointer items-center text-black hover:text-blue-500 p-2 hover:bg-gray-200 rounded-md space-x-4
     }
@@ -561,7 +574,15 @@ export default {
     }
 
     .buy_itemCard {
-        @apply rounded-2xl hover:shadow-2xl bg-white cursor-pointer overflow-hidden
+        @apply rounded-2xl hover:shadow-lg bg-white cursor-pointer overflow-hidden
+    }
+
+    .hot .n-carousel__slide {
+        @apply hover:shadow-lg rounded-2xl
+    }
+
+    .hot .buy_itemCard {
+        @apply  hover:shadow-none
     }
 
 .header-link-item {
@@ -672,7 +693,6 @@ export default {
     }
   }
 
-
   .button {
     .plan {
       .plan-content {
@@ -690,6 +710,42 @@ export default {
         color: #409eff;
         background: #ecf5ff;
         border:1px solid #b3d8ff;
+      }
+    }
+  }
+
+  .hot {
+    .n-carousel {
+      position: relative;
+      height: 500px;
+
+      .n-carousel__slides {
+        height: 425px;
+        position: absolute;
+        bottom: 0;
+        top: 35px;
+      }
+
+      .n-carousel__arrow-group {
+        position: absolute !important;
+        top: 0 !important;
+        .n-carousel__arrow {
+          background: #333;
+        }
+      }
+
+      .n-carousel__dots {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        bottom: 0;
+
+        .n-carousel__dot {
+          background: #DEE2E6 !important;
+        }
+        .n-carousel__dot--active {
+          background: #919DA8 !important;
+        }
+
       }
     }
   }
