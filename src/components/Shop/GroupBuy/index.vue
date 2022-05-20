@@ -277,10 +277,21 @@
 import { dateZhTW, zhTW } from "naive-ui";
 import { numberToCurrencyNo } from "@/js/numberToCurrency"; //金額自動千分位
 
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
+
 export default {
+  components:{
+    Swiper,
+    SwiperSlide,
+  },
   name: "",
   data() {
     return {
+      modules: [Pagination],
       numberToCurrencyNo, //金額自動千分位
       // 照片輪播
       banner: [
